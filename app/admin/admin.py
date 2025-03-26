@@ -45,6 +45,7 @@ async def admin_submit(
     welcome_message: str = Form(...),
     prompt: str = Form(...),
     # speed: float = Form(...),
+    webhook_url = Form(...),
     voice: str = Form(...),
     _: None = Depends(check_auth)
 ):
@@ -55,10 +56,11 @@ async def admin_submit(
         "plivo_auth_token": plivo_auth_token ,
         "welcome_message": welcome_message,
         "prompt": prompt,
+        'webhook_url': webhook_url,
         # "speed": speed,
         "voice": voice,
     }
-    print("data ",state.admin_config)
+    print("data ", state.admin_config)
 
     return templates.TemplateResponse("admin.html", {
         "request": request,
